@@ -5,7 +5,7 @@ from src import discriminators
 import generators
 
 
-def gan_llama(file_contents, iterations=1):
+def gan_llama(file_contents, iterations=0):
     logging.basicConfig(level=logging.INFO)
     logging.info(file_contents)
 

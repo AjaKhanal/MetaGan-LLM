@@ -5,6 +5,10 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
 
+import json
+import pandas as pd
+
+
 from stats_library import StatsLibrary
 
 
@@ -74,19 +78,26 @@ def statistical_llama(real_data, synthetic_data, _model="llama3.1"):
     return ans
 
 
-def explicit(real_data, synthetic_data):
+def explicit(real_data, synthetic_data, _model="llama3.1"):
     print("hi")
     # todo: code it up
+    discriminator_prompt = generate_discriminator_prompt(real_data, synthetic_data)
+    response: ChatResponse = chat(
+        model=_model,
+        messages=[
+            {"role": "system", "content": "You are a data analyst."},
+            {"role": "user", "content": discriminator_prompt}
+        ]
+    )
+
+    ans = response.message.content
+    return ans
 
 
 def adversarial(real_data, synthetic_data):
     print("hi")
     # todo: code it up
 
-
-import json
-import pandas as pd
-import os
 
 
 def process_data(data, filename):
